@@ -1,6 +1,6 @@
 <?php
 
-namespace Modelo\Conta;
+namespace Alura\Banco\Modelo\Conta;
 
 class Conta
 {
@@ -21,17 +21,19 @@ class Conta
         self::$numeroDeContas--;
     }
 
-    public function saca(float $valorASacar): void
+    public function sacar(float $valorASacar): void
     {
-        if ($valorASacar > $this->saldo) {
+        $tarifaSaque = $valorASacar * 0.05;
+        $valorSaque = $valorASacar + $tarifaSaque;
+        if ($valorSaque > $this->saldo) {
             echo "Saldo indisponível";
             return;
         }
 
-        $this->saldo -= $valorASacar;
+        $this->saldo -= $valorSaque;
     }
 
-    public function deposita(float $valorADepositar): void
+    public function depositar(float $valorADepositar): void
     {
         if ($valorADepositar < 0) {
             echo "Valor precisa ser positivo";
